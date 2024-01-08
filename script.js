@@ -44,12 +44,26 @@ function lightMode(){
 function switchTheme(event){
     if(event.target.checked){
         document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
         darkMode();
     }
     else{
         lightMode();
+        localStorage.setItem('theme', 'light');
         document.documentElement.setAttribute('data-theme', 'light');
     }
 }
 
 toggleSwitch.addEventListener('change', switchTheme);
+
+const currTheme = localStorage.getItem('theme');
+if(currTheme === 'dark'){
+    document.documentElement.setAttribute('data-theme', 'dark');
+    darkMode();
+    toggleSwitch.checked = true;
+}
+else if(currTheme === 'light'){
+    document.documentElement.setAttribute('data-theme', 'light');
+    lightMode();
+    toggleSwitch.checked = false;
+}
